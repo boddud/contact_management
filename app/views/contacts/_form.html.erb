@@ -1,0 +1,35 @@
+<%= form_for @contact,  html: {:class => 'form-horizontal'} do |f| %>
+	<div class="form-group">
+		<%= f.label :first_name, class: 'control-label col-md-2' %><br>
+		<%= f.text_field :first_name %>
+	</div>
+	<div class="form-group">
+		<%= f.label :last_name, class: 'control-label col-md-2' %><br>
+		<%= f.text_field :last_name %>
+	</div>
+	<div class="form-group">
+		<%= f.label :email, class: 'control-label col-md-2' %><br>
+		<%= f.text_field :email %>
+	</div>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#address">Address(s)</a></li>
+		<li><a data-toggle="tab" href="#phone">Communication Details</a></li>
+	</ul>
+	<div class="tab-pane fade in active" id="address">
+		<%= f.fields_for :addresses do |builder| %>
+			<%= builder.label :address %><br>
+			<%= builder.text_field :address %><br>
+			<%= builder.label :country %><br>
+			<%= builder.text_field :country %>
+		<% end %>
+	</div>
+	<div class="tab-pane fade" id="phone">
+		<%= f.fields_for :phones do |builder| %>
+			<%= builder.label :phone %>
+			<%= builder.text_field :phone %>
+		<% end %>
+	</div>
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+<% end %>

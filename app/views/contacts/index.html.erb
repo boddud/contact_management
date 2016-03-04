@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Email</th>
+			<th>Primary Address</th>
+			<th>Primary Contact</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @contacts.each do |contact| %>
+			<tr>
+				<td><%= contact.first_name %></td>
+				<td><%= contact.last_name %></td>
+				<td><%= contact.email %></td>
+				<td><%= contact.addresses.last.address+'-'+contact.addresses.last.country if contact.addresses.present? %></td>
+				<td><%= contact.phones.last.phone if contact.phones.last.present? %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
