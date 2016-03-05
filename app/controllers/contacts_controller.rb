@@ -11,6 +11,7 @@ class ContactsController < ApplicationController
 	end
 
 	def create
+		debugger
 		@contact = Contact.new(contact_params)
 		if contact_params[:addresses_attributes].present?
 			contact_params[:addresses_attributes].each do |key,value|

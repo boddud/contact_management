@@ -1,6 +1,8 @@
 <%= f.fields_for :addresses do |builder| %>
-	<%= builder.label :address %><br>
-	<%= builder.text_field :address %><br>
-	<%= builder.label :country %><br>
-	<%= builder.text_field :country %>
+	<div class="address-values">
+		<%= builder.label :address %><br>
+		<%= builder.text_field :address %><br>
+		<%= builder.label :country %><br>
+		<%= builder.text_field :country %>
+	</div>
 <% end %>

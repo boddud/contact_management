@@ -17,7 +17,11 @@
 		<li><a data-toggle="tab" href="#phone">Communication Details</a></li>
 	</ul>
 	<div class="tab-pane fade in active" id="address">
-		<%= render :partial => "address", :locals => { :f => f } %>
+		<%= render :partial => "address", :locals => { :f => f } %> <br>
+		<%#= render :partial => "address", :locals => { :f => f } %>
+		<div class="add-address">
+			<%= link_to "Add address", '#' %>
+		</div>
 	</div>
 	<div class="tab-pane fade" id="phone">
 		<%= render :partial => "phone", :locals => { :f => f } %>
