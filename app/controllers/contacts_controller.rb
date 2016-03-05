@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+
 	def new
 		@contact = Contact.new
 		@address = @contact.addresses.build
@@ -24,6 +25,7 @@ class ContactsController < ApplicationController
 		if @contact.save
 			redirect_to root_path, notice: 'Contact was successfully created.'
 		else
+			flash[:error] = @contact.errors.full_messages.to_sentence
 			render :new
 		end
 	end
