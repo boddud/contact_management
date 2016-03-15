@@ -1,4 +1,6 @@
 <%= f.fields_for :phones do |builder| %>
-	<%= builder.label :phone %>
-	<%= builder.text_field :phone %>
+	<div class="phone-values">
+		<%= builder.label :phone %>
+		<%= builder.text_field :phone %>
+	</div>
 <% end %>

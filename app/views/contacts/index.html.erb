@@ -1,22 +1,25 @@
-<table class="table table-bordered">
-	<thead>
-		<tr>
-			<th>Firstname</th>
-			<th>Lastname</th>
-			<th>Email</th>
-			<th>Primary Address</th>
-			<th>Primary Contact</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @contacts.each do |contact| %>
+<% if @contacts.count > 0 %>
+	<table class="table table-bordered" style="width:70%">
+		<thead>
 			<tr>
-				<td><%= contact.first_name %></td>
-				<td><%= contact.last_name %></td>
-				<td><%= contact.email %></td>
-				<td><%= contact.addresses.last.address+'-'+contact.addresses.last.country if contact.addresses.present? %></td>
-				<td><%= contact.phones.last.phone if contact.phones.last.present? %></td>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Primary Address</th>
+				<th>Primary Contact</th>
 			</tr>
-		<% end %>
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			<% @contacts.each do |contact| %>
+				<tr>
+					<td><%= contact.name %></td>
+					<td><%= contact.email %></td>
+					<td><%= contact.addresses.first.address+'-'+contact.addresses.first.country if contact.addresses.present? %></td>
+					<td><%= contact.phones.first.phone if contact.phones.first.present? %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+<% else %>
+	<h3>No contacts created</h3>
+	click <%= link_to "here", new_contact_path, method: :get %> to create
+<% end %>

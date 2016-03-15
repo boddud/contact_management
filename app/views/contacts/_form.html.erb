@@ -1,32 +1,46 @@
 <%= form_for @contact,  html: {:class => 'form-horizontal'} do |f| %>
-	<%= @contact.errors.full_messages.to_sentence %>
-	<div class="form-group">
-		<%= f.label :first_name, class: "control-label col-md-2" %><br>
-		<%= f.text_field :first_name,class: "#{@contact.errors.present? && @contact.errors[:first_name].present? ? 'has-error' : ''}" %>
-	</div>
-	<div class="form-group">
-		<%= f.label :last_name, class: 'control-label col-md-2' %><br>
-		<%= f.text_field :last_name %>
-	</div>
-	<div class="form-group">
-		<%= f.label :email, class: 'control-label col-md-2' %><br>
-		<%= f.text_field :email %>
-	</div>
-	<ul class="nav nav-tabs">
-		<li class="active"><a data-toggle="tab" href="#address">Address(s)</a></li>
-		<li><a data-toggle="tab" href="#phone">Communication Details</a></li>
-	</ul>
-	<div class="tab-pane fade in active" id="address">
-		<%= render :partial => "address", :locals => { :f => f } %> <br>
-		<%#= render :partial => "address", :locals => { :f => f } %>
-		<div class="add-address">
-			<%= link_to "Add address", '#' %>
+	<% if @contact.errors.present?%>
+		<div class="alert btn-danger">
+			<a href="#" class="close" data-dismiss="alert">×</a>
+			<strong>Warning!</strong> <%= @contact.errors.full_messages.to_sentence %>
 		</div>
-	</div>
-	<div class="tab-pane fade" id="phone">
-		<%= render :partial => "phone", :locals => { :f => f } %>
-	</div>
-	<div class="actions">
-		<%= f.submit %>
-	</div>
+	<% end %>
+	<fieldset>
+		<legend>Basic Info</legend>
+		<div class="form-group">
+			<%= f.label :first_name, class: "control-label col-md-2" %>
+			<%= f.text_field :first_name,class: "#{@contact.errors.present? && @contact.errors[:first_name].present? ? 'has-error' : ''}" %>
+		</div>
+		<div class="form-group">
+			<%= f.label :last_name, class: 'control-label col-md-2' %>
+			<%= f.text_field :last_name %>
+		</div>
+		<div class="form-group">
+			<%= f.label :email, class: 'control-label col-md-2' %>
+			<%= f.text_field :email %>
+		</div>
+		<div class="tab-index">
+			<ul class="nav nav-tabs">
+				<li role="presentation" class="active"><a href="#address" aria-controls="address" role="tab" data-toggle="tab" aria-expanded="true">Address(s)</a></li>
+				<li role="presentation"><a href="#phone" aria-controls="phone" role="tab" data-toggle="tab" aria-expanded="false">Communication Details</a></li>
+			</ul>
+		</div>
+		<div class="tab-content info panel">
+			<div role="tabpanel" class="tab-pane active" id="address">
+				<%= render :partial => "address", :locals => { :f => f } %> <br>
+				<div class="add-address">
+					<%= link_to "Add another address", '#', class: 'btn btn-success' %>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="phone">
+				<%= render :partial => "phone", :locals => { :f => f } %>
+				<div class="add-phone">
+					<%= link_to "Add another phone", '#', class: 'btn btn-success' %>
+				</div>
+			</div>
+		</div>
+		<div class="actions pull-right">
+			<%= link_to "Cancel", root_path, class: 'btn btn-danger' %><%= f.submit 'Create', :class => 'btn btn-success' %>
+		</div>
+	</fieldset>
 <% end %>

@@ -7,11 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<script type="text/javascript">
+		<% flash.each do |key, value| %>
+			Messenger().post({message: "<%= value.kind_of?(Array) ? value.to_sentence : value %>", type: "<%= key == 'alert' ? 'error' : 'success' %>"});
+		<% end %>
+	</script>
 	<div class="container">
 		<header>
 			<ul class="nav nav-tabs pull-right">
 				<li><%= link_to "All Contacts", root_path %></li>
-				<li><%= link_to "New Contact", new_contact_path %></li>
+				<li><%= link_to "New Contact", new_contact_path, method: :get %></li>
 			</ul>
 			<div class="clearfix"></div>
 		</header>

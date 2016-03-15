@@ -11,15 +11,14 @@ class ContactsController < ApplicationController
 	end
 
 	def create
-		debugger
 		@contact = Contact.new(contact_params)
-		if contact_params[:addresses_attributes].present?
-			contact_params[:addresses_attributes].each do |key,value|
+		if address_params[:addresses_attributes].present?
+			address_params[:addresses_attributes].each do |key,value|
 				@contact.addresses.build(value)
 			end
 		end
-		if contact_params[:phones_attributes].present?
-			contact_params[:phones_attributes].each do |key,value|
+		if phone_params[:phones_attributes].present?
+			phone_params[:phones_attributes].each do |key,value|
 				@contact.phones.build(value)
 			end
 		end
@@ -32,7 +31,7 @@ class ContactsController < ApplicationController
 	end
 
 	def contact_params
-		params.require(:contact).permit(:first_name, :last_name, :email, phones_attributes: [:phone], addresses_attributes: [:address, :country])
+		params.require(:contact).permit(:first_name, :last_name, :email)
 	end
 
 	def address_params
